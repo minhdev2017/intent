@@ -26,4 +26,6 @@ class Category {
   static const String CATEGORY_PREFERENCE =
       "android.intent.category.PREFERENCE";
   static const String CATEGORY_INFO = "android.intent.category.INFO";
+  static const String CATEGORY_LAUNCHER =
+      "android.intent.category.LAUNCHER";
 }

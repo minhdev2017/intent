@@ -46,6 +46,8 @@ class Action {
   /// you may be passing a URL, and it'll open list of eligible candidate apps, which can help you in viewing that URL
   static const String ACTION_VIEW = "android.intent.action.VIEW";
 
+  static const String ACTION_LAUNCHER ="android.intent.action.Launcher";
+
   /// quickly opens default assist app, and finds definition for queried text
   static const String ACTION_DEFINE = "android.intent.action.DEFINE";
 
