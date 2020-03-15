@@ -81,12 +81,19 @@ class IntentPlugin(private val registrar: Registrar, private val activity: Activ
             // when we're not interested in result of activity started, we call this method via platform channel
             "startActivity" -> {
                 val intent = Intent()
+                var componentName = "";
+                var activityName = "";
                 intent.action = call.argument<String>("action")
                 if (call.argument<String>("data") != null)
                     intent.data = Uri.parse(call.argument<String>("data"))
                 call.argument<Map<String, Any>>("extra")?.apply {
                     this.entries.forEach {
-                        intent.putExtra(it.key, it.value as String)
+                        if(it.key == "componentName")
+                            componentName = it.value as String;
+                        else if(it.key == "activityName")
+                            activityName = it.value as String;
+                        else
+                            intent.putExtra(it.key, it.value as String)
                         
                     }
                 }
@@ -99,7 +106,7 @@ class IntentPlugin(private val registrar: Registrar, private val activity: Activ
                 if (call.argument<String>("type") != null)
                     intent.type = call.argument<String>("type")
                 try {
-                    intent.setComponent(ComponentName("com.appdexter.dexplayer", "com.appdexter.dexplayer.activity.SelectPlayerActivity"))
+                    intent.setComponent(ComponentName(componentName, activityName))
                     activity.startActivity(intent)
                 } catch (e: Exception) {
                     result.error("Error", e.toString(), null)
